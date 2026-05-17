@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Sentiment Analysis Tool</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- HEADER -->
+
+  <header>
+
+    <div>
+      <h1>AI Sentiment Analysis Tool</h1>
+      <p>
+        Analyze emotions, customer feedback, tweets, reviews, and comments using AI-powered sentiment detection.
+      </p>
+    </div>
+
+    <button id="themeToggle">
+      🌙 Dark Mode
+    </button>
+
+  </header>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-text">
+      <h2>Advanced AI Sentiment Intelligence</h2>
+
+      <p>
+        Understand emotional tone, classify sentiment, visualize analytics,
+        and generate AI-powered insights instantly.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- MAIN -->
+
+  <main class="container">
+
+    <!-- LEFT -->
+
+    <section class="left-panel card">
+
+      <h2>Analyze Text</h2>
+
+      <textarea
+        id="userText"
+        placeholder="Paste product reviews, tweets, customer feedback, YouTube comments, movie reviews, or multiple texts separated by new lines..."
+      ></textarea>
+
+      <div class="button-group">
+
+        <button class="primary-btn" onclick="analyzeSentiment()">
+          Analyze Sentiment
+        </button>
+
+        <button class="secondary-btn" onclick="batchAnalyze()">
+          Batch Analyze
+        </button>
+
+        <button class="secondary-btn" onclick="exportCSV()">
+            Export CSV
+        </button>
+        <button class="secondary-btn" onclick="exportPDF()">
+            Export PDF
+        </button>
+
+      </div>
+      <div id="loading" class="loading hidden">
+         <div class="spinner"></div>
+         <p>AI is analyzing sentiment...</p>
+      </div>
+
+      <!-- EXAMPLES -->
+
+      <div class="examples">
+
+        <h3>Quick Examples</h3>
+
+        <div class="example-grid">
+
+          <button onclick="loadExample(0)">
+            Product Review
+          </button>
+
+          <button onclick="loadExample(1)">
+            Tweet
+          </button>
+
+          <button onclick="loadExample(2)">
+            Customer Feedback
+          </button>
+
+          <button onclick="loadExample(3)">
+            Movie Review
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- RIGHT -->
+
+    <section class="right-panel">
+
+      <!-- STATS -->
+
+      <div class="stats-grid">
+
+        <div class="stat-card blue">
+          <span>Total Analyses</span>
+          <h2 id="totalAnalyses">0</h2>
+        </div>
+
+        <div class="stat-card green">
+          <span>Positive</span>
+          <h2 id="positiveCount">0</h2>
+        </div>
+
+        <div class="stat-card red">
+          <span>Negative</span>
+          <h2 id="negativeCount">0</h2>
+        </div>
+
+        <div class="stat-card gray">
+          <span>Neutral</span>
+          <h2 id="neutralCount">0</h2>
+        </div>
+
+        <div class="stat-card purple">
+          <span>Average Confidence</span>
+          <h2 id="averageConfidence">0%</h2>
+        </div>
+
+      </div>
+
+      <!-- RESULTS -->
+
+      <div class="result-card card">
+
+        <h2>Analysis Result</h2>
+
+        <div class="result-grid">
+
+          <div>
+            <span>Sentiment</span>
+            <h3 id="sentimentResult">---</h3>
+          </div>
+
+          <div>
+            <span>Confidence</span>
+            <h3 id="confidenceResult">0%</h3>
+          </div>
+
+          <div>
+            <span>Emotional Tone</span>
+            <h3 id="toneResult">---</h3>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- EXPLANATION -->
+
+      <div class="card">
+
+        <h2>AI-Generated Explanation</h2>
+
+        <p id="explanation">
+          AI explanation will appear here.
+        </p>
+
+      </div>
+
+      <!-- INSIGHT -->
+
+      <div class="card">
+
+        <h2>AI Insights</h2>
+
+        <p id="insight">
+          AI-generated insight will appear here.
+        </p>
+
+      </div>
+
+      <!-- CHARTS -->
+
+      <div class="chart-container">
+
+        <div class="card chart-card">
+          <h2>Sentiment Distribution</h2>
+          <canvas id="pieChart"></canvas>
+        </div>
+
+        <div class="card chart-card">
+          <h2>Sentiment Count</h2>
+          <canvas id="barChart"></canvas>
+        </div>
+
+      </div>
+
+      <!-- HISTORY -->
+
+      <div class="card history-card">
+
+        <h2>Sentiment History</h2>
+
+        <div class="history-controls">
+
+          <input
+              type="text"
+              id="searchInput"
+              placeholder="Search history..."
+              onkeyup="renderHistory()"
+          />
+
+          <select id="filterSelect" onchange="renderHistory()">
+              <option value="All">All</option>
+              <option value="Positive">Positive</option>
+              <option value="Negative">Negative</option>
+              <option value="Neutral">Neutral</option>
+          </select>
+
+      </div>
+        <div id="historyContainer"></div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

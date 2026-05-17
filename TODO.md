@@ -1,0 +1,4 @@
+- [x] Inspect current Chart.js script include in index.html
+- [x] Update Chart.js CDN URL in index.html to a versioned/stable file to avoid missing .map 404
+- [ ] (Optional) Add a minimal safety check for Chart being available
+- [ ] Verify: refresh page and confirm chart renders and console error is gone
