@@ -315,25 +315,61 @@ function renderCharts(positive, negative, neutral) {
   });
 
   barChart = new Chart(barCtx, {
-    type: "bar",
 
-    data: {
-      labels: ["Positive", "Negative", "Neutral"],
+  type: "line",
 
-      datasets: [{
-        label: "Sentiment Count",
+  data: {
 
-        data: [positive, negative, neutral],
+    labels: ["Positive", "Negative", "Neutral"],
 
-        backgroundColor: [
-          "#22c55e",
-          "#ef4444",
-          "#94a3b8"
-        ]
-      }]
+    datasets: [{
+
+      label: "Sentiment Trend",
+
+      data: [positive, negative, neutral],
+
+      fill: true,
+
+      tension: 0.4,
+
+      borderWidth: 3,
+
+      pointRadius: 6,
+
+      pointHoverRadius: 8,
+
+      backgroundColor: "rgba(37, 99, 235, 0.15)",
+
+      borderColor: "#2563eb",
+
+      pointBackgroundColor: "#2563eb"
+
+    }]
+  },
+
+  options: {
+
+    responsive: true,
+
+    plugins: {
+
+      legend: {
+        display: true
+      }
+
+    },
+
+    scales: {
+
+      y: {
+        beginAtZero: true
+      }
+
     }
-  });
-}
+
+  }
+
+});
 
 function exportCSV() {
 
