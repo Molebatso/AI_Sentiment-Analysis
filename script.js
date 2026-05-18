@@ -286,23 +286,26 @@ function renderHistory() {
 
 function renderCharts(positive, negative, neutral) {
 
-  const pieCtx =
-    document.getElementById("pieChart");
+  const pieCtx = document.getElementById("pieChart");
+  const barCtx = document.getElementById("barChart");
 
-  const barCtx =
-    document.getElementById("barChart");
+  if (!pieCtx || !barCtx) return;
 
   if (pieChart) pieChart.destroy();
   if (barChart) barChart.destroy();
-  if (trendChart) trendChart.destroy();
+
+  // PIE CHART
 
   pieChart = new Chart(pieCtx, {
+
     type: "doughnut",
 
     data: {
+
       labels: ["Positive", "Negative", "Neutral"],
 
       datasets: [{
+
         data: [positive, negative, neutral],
 
         backgroundColor: [
@@ -310,66 +313,86 @@ function renderCharts(positive, negative, neutral) {
           "#ef4444",
           "#94a3b8"
         ]
+
       }]
+    },
+
+    options: {
+
+      responsive: true,
+
+      plugins: {
+
+        legend: {
+          position: "bottom"
+        }
+
+      }
+
     }
+
   });
+
+  // LINE CHART
 
   barChart = new Chart(barCtx, {
 
-  type: "line",
+    type: "line",
 
-  data: {
+    data: {
 
-    labels: ["Positive", "Negative", "Neutral"],
+      labels: ["Positive", "Negative", "Neutral"],
 
-    datasets: [{
+      datasets: [{
 
-      label: "Sentiment Trend",
+        label: "Sentiment Trend",
 
-      data: [positive, negative, neutral],
+        data: [positive, negative, neutral],
 
-      fill: true,
+        fill: true,
 
-      tension: 0.4,
+        tension: 0.4,
 
-      borderWidth: 3,
+        borderWidth: 3,
 
-      pointRadius: 6,
+        pointRadius: 6,
 
-      pointHoverRadius: 8,
+        pointHoverRadius: 8,
 
-      backgroundColor: "rgba(37, 99, 235, 0.15)",
+        backgroundColor: "rgba(37, 99, 235, 0.15)",
 
-      borderColor: "#2563eb",
+        borderColor: "#2563eb",
 
-      pointBackgroundColor: "#2563eb"
+        pointBackgroundColor: "#2563eb"
 
-    }]
-  },
-
-  options: {
-
-    responsive: true,
-
-    plugins: {
-
-      legend: {
-        display: true
-      }
-
+      }]
     },
 
-    scales: {
+    options: {
 
-      y: {
-        beginAtZero: true
+      responsive: true,
+
+      plugins: {
+
+        legend: {
+          display: true
+        }
+
+      },
+
+      scales: {
+
+        y: {
+          beginAtZero: true
+        }
+
       }
 
     }
 
-  }
+  });
 
-});
+}
 
 function exportCSV() {
 
