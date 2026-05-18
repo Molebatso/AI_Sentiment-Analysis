@@ -281,7 +281,7 @@ Possible future enhancements include:
 
 # 👨‍💻 Author
 
-Developed as part of the **Week 3 Web Application Assessment Project at Capaciti**.
+Developed as part of the **Week 3 Sentiment Analysis & Data Insight Assessment at Capaciti**.
 
 ---
 
