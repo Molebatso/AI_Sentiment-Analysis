@@ -286,25 +286,42 @@ function renderHistory() {
 
 function renderCharts(positive, negative, neutral) {
 
-  const pieCtx = document.getElementById("pieChart");
-  const barCtx = document.getElementById("barChart");
+  const pieCtx =
+    document.getElementById("pieChart");
 
-  if (!pieCtx || !barCtx) return;
+  const barCtx =
+    document.getElementById("barChart");
 
   if (pieChart) pieChart.destroy();
   if (barChart) barChart.destroy();
-
-  // PIE CHART
+  if (trendChart) trendChart.destroy();
 
   pieChart = new Chart(pieCtx, {
-
     type: "doughnut",
 
     data: {
-
       labels: ["Positive", "Negative", "Neutral"],
 
       datasets: [{
+        data: [positive, negative, neutral],
+
+        backgroundColor: [
+          "#22c55e",
+          "#ef4444",
+          "#94a3b8"
+        ]
+      }]
+    }
+  });
+
+  barChart = new Chart(barCtx, {
+    type: "bar",
+
+    data: {
+      labels: ["Positive", "Negative", "Neutral"],
+
+      datasets: [{
+        label: "Sentiment Count",
 
         data: [positive, negative, neutral],
 
@@ -313,85 +330,9 @@ function renderCharts(positive, negative, neutral) {
           "#ef4444",
           "#94a3b8"
         ]
-
       }]
-    },
-
-    options: {
-
-      responsive: true,
-
-      plugins: {
-
-        legend: {
-          position: "bottom"
-        }
-
-      }
-
     }
-
   });
-
-  // LINE CHART
-
-  barChart = new Chart(barCtx, {
-
-    type: "line",
-
-    data: {
-
-      labels: ["Positive", "Negative", "Neutral"],
-
-      datasets: [{
-
-        label: "Sentiment Trend",
-
-        data: [positive, negative, neutral],
-
-        fill: true,
-
-        tension: 0.4,
-
-        borderWidth: 3,
-
-        pointRadius: 6,
-
-        pointHoverRadius: 8,
-
-        backgroundColor: "rgba(37, 99, 235, 0.15)",
-
-        borderColor: "#2563eb",
-
-        pointBackgroundColor: "#2563eb"
-
-      }]
-    },
-
-    options: {
-
-      responsive: true,
-
-      plugins: {
-
-        legend: {
-          display: true
-        }
-
-      },
-
-      scales: {
-
-        y: {
-          beginAtZero: true
-        }
-
-      }
-
-    }
-
-  });
-
 }
 
 function exportCSV() {
